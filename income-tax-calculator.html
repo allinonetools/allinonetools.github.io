@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculate your income tax for India in 2025 using our easy-to-use Income Tax Calculator. Supports both old and new tax regimes. Includes HRA, 80C, 80D, and other deductions.">
-    <meta name="keywords" content="Income Tax Calculator, India Tax Calculator, Standard Tax Deduction, Tax Rebate, Tax Calculator 2025, HRA Deduction, Section 80C, Section 80D, Old Tax Regime, New Tax Regime">
+    <meta name="keywords" content="Income Tax Calculator, India Tax Calculator, tax calculator, incometax, Standard Tax Deduction, Tax Rebate, Tax Calculator 2025, HRA Deduction, Section 80C, Section 80D, Old Tax Regime, New Tax Regime">
     <meta name="author" content="Subha">
-    <title>Income Tax Calculator - India 2025 | Calculate Your Taxes Online</title>
+    <title>Latest Income Tax Calculator - India | Calculate Your Taxes Online</title>
     <style>
         /* General Styles */
         body {
@@ -96,7 +96,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Income Tax Calculator (India) - 2025</h1>
+            <h1>Income Tax Calculator (India)</h1>
         </div>
     </header>
 
@@ -204,7 +204,7 @@
             let hraExemption = 0;
             if (taxRegime === "old" && hra > 0 && rentPaid > 0) {
                 let condition1 = hra;
-                let condition2 = rentPaid - (0.1 * salary);
+                let condition2 = Math.max(rentPaid - (0.1 * salary), 0); // Ensure condition2 is not negative
                 let condition3 = (metroCity === "yes") ? 0.5 * salary : 0.4 * salary;
                 hraExemption = Math.min(condition1, condition2, condition3);
             }
@@ -238,9 +238,9 @@
                     tax = 0;
                 }
 
-                // Apply Tax Rebate (up to ₹60,000 for new regime)
-                if (tax <= 60000) {
-                    tax = 0; // Full rebate
+                // Apply Tax Rebate (up to ₹60,000 for new regime if taxable income is up to ₹12,00,000)
+                if (taxableIncome <= 1200000) {
+                    tax = Math.max(tax - 60000, 0); // Reduce tax by ₹60,000, but not below zero
                 }
             } else {
                 // Old Regime Tax Slabs (FY 2023-24)
